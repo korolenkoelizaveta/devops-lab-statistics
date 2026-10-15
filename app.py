@@ -79,14 +79,10 @@ async def users_stats(request: Request):
 
     if admin_or_guest:
         users = [u for u in users if u.get("role") != "admin"]
-        ids = [int(u["id"]) for u in users]
         return {
             "count": len(users),
             "clients": sum(u.get("role") == "client" for u in users),
             "trainers": sum(u.get("role") == "trainer" for u in users),
-            "min_id": min(ids) if ids else None,
-            "max_id": max(ids) if ids else None,
-            "avg_id": float(mean(ids)) if ids else None,
         }
 
     if role == "client":
@@ -152,7 +148,6 @@ def _top(sessions: list[dict], key: str, names: dict[int, str]):
 def _empty_workout_stats() -> dict:
     return {
         "total": 0, "last_7_days": 0, "upcoming": 0,
-        "avg_per_client": 0.0,
         "top_trainer_name": None, "top_trainer_sessions": None,
         "top_client_name": None, "top_client_sessions": None,
     }
@@ -177,10 +172,6 @@ async def workout_stats(request: Request):
     last_7_days = sum(week_ago <= d <= now for d in dates)
     upcoming = sum(d > now for d in dates)
     clients = {s["client"] for s in sessions if s.get("client") is not None}
-    avg_per_client = (
-        float(total / len(clients))
-        if clients and (admin_or_guest or role == "trainer") else 0.0
-    )
 
     trainer_name, trainer_count = (None, None)
     client_name, client_count = (None, None)
@@ -193,7 +184,6 @@ async def workout_stats(request: Request):
         "total": total,
         "last_7_days": last_7_days,
         "upcoming": upcoming,
-        "avg_per_client": avg_per_client,
         "top_trainer_name": trainer_name,
         "top_trainer_sessions": trainer_count,
         "top_client_name": client_name,

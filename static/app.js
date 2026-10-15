@@ -74,13 +74,6 @@ async function loadUsersStatistics() {
             { label: "Всего пользователей", value: data.count },
             { label: "Клиентов", value: data.clients },
             { label: "Тренеров", value: data.trainers },
-            { label: "Минимальный ID", value: data.min_id },
-            { label: "Максимальный ID", value: data.max_id },
-            {
-                label: "Средний ID",
-                value: data.avg_id,
-                fractionDigits: 2
-            }
         ]);
 
     } catch (error) {
@@ -170,11 +163,6 @@ async function loadWorkoutsStatistics() {
                 value: data.last_7_days
             },
             { label: "Предстоящих", value: data.upcoming },
-            {
-                label: "Среднее на клиента",
-                value: data.avg_per_client,
-                fractionDigits: 2
-            },
             {
                 label: "Самый активный тренер",
                 value: data.top_trainer_name
