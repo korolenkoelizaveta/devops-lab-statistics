@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym — Статистика</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Gym3</a>
+            <span class="navbar-text text-white">Микросервис статистики</span>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        <h2 class="mb-3">Статистика фитнес-клуба</h2>
+        <p class="text-muted mb-4">Аналитические показатели пользователей, абонементов и тренировок.</p>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5>Пользователи</h5>
+                        <div id="users-stats">Загрузка...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5>Абонементы</h5>
+                        <div id="memberships-stats">Загрузка...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5>Типы абонементов</h5>
+                        <div id="membership-types-stats">Загрузка... </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5>Тренировки</h5>
+                        <div id="workouts-stats">Загрузка...</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+    <script src="/statistics/app.js"></script>
+
+</body>
+</html>

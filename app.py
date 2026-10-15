@@ -1,5 +1,7 @@
 import asyncio
 import os
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 from statistics import mean
@@ -8,6 +10,15 @@ import httpx
 from fastapi import FastAPI, HTTPException, Request
 
 app = FastAPI(title="Gym Statistics Service", version="1.0.0")
+
+STATIC_DIR = Path(__file__).resolve().parent / "static"
+
+app.mount(
+    "/statistics",
+    StaticFiles(directory=STATIC_DIR, html=True),
+    name="statistics-ui"
+)
+
 BACKEND_URL = os.getenv("BACKEND_URL", "http://backend:8000").rstrip("/")
 
 @app.get("/health")
